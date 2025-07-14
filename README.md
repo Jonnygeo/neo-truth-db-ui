@@ -1,143 +1,73 @@
-![](http://media.charlesleifer.com/blog/photos/sqlite-web.png)
+# 🕸️ Neo Truth DB UI
 
-`sqlite-web` is a web-based SQLite database browser written in Python.
+A lightweight web-based interface for exploring and interacting with the **Neo Truth Database** — a structured archive of scriptural dissection, historical analysis, and exposed manipulations across time, religion, and systems of control.
 
-Project dependencies:
+> “It’s not just a database. It’s a window into what they didn’t want you to see.”
 
-* [flask](http://flask.pocoo.org)
-* [peewee](http://docs.peewee-orm.com)
-* [pygments](http://pygments.org)
+---
 
-### Installation
+## 🔍 What is This?
 
-```sh
-$ pip install sqlite-web
-```
+**neo-truth-db-ui** is a user interface built around [`sqlite-web`](https://github.com/coleifer/sqlite-web), allowing you to visually explore and edit your local or remote SQLite-based truth datasets.
 
-### Usage
+Whether you're tracking biblical corruption, historical manipulation, or philosophical data structures, this UI gives you control.
 
-```sh
-$ sqlite_web /path/to/database.db
-```
+---
 
-Or run with docker:
+## 🛠️ Tech Stack
 
-```sh
-$ docker run -it --rm \
-    -p 8080:8080 \
-    -v /path/to/your-data:/data \
-    -e SQLITE_DATABASE=db_filename.db \
-    ghcr.io/coleifer/sqlite-web:latest
-```
+- **Python**
+- **Flask** (Web Server)
+- **Peewee** (SQLite ORM)
+- **sqlite-web** (Main UI)
+- **Pygments** (Syntax Highlighting)
 
-Then navigate to http://localhost:8080/ to view your database.
+---
+📂 Folder Structure
+csharp
+Copy
+Edit
+neo-truth-db-ui/
+├── public/              # Public assets (optional)
+├── js/                  # Client-side scripts
+├── firebase.js          # Future integration (placeholder)
+├── index.html           # Launchpad or static interface
+├── README.md            # This file
+└── neo-truth.db         # Your SQLite truth database
+💡 Use Cases
+View and edit dissected biblical texts and truth tags
 
-### Features
+Export data to JSON/CSV for apps or research
 
-* Works with your existing SQLite databases, or can be used to create new databases.
-* Add or drop:
-  * Tables
-  * Columns (with support for older versions of Sqlite)
-  * Indexes
-* Export data as JSON or CSV.
-* Import JSON or CSV files.
-* Browse table data.
-* Insert, Update or Delete rows.
+Collaborate with others in NeoShade’s ecosystem
 
-### Screenshots
+Plug into AI agents like Bruce or NeoLegacy for intelligent truth retrieval
 
-The index page shows some basic information about the database, including the number of tables and indexes, as well as its size on disk:
+🔐 Coming Soon
+🔎 Search filters for tags like manipulation, divine, interpolated, etc.
 
-![](https://media.charlesleifer.com/blog/photos/im-1694620302295.png)
+🔄 Realtime sync with NeoShade AI
 
-The `structure` tab displays information about the structure of the table, including columns, indexes, triggers, and foreign keys (if any exist). From this page you can also create, rename or drop columns and indexes.
+📜 Visual dissection overlays per verse or event
 
-![](https://media.charlesleifer.com/blog/photos/im-1694620314144.png)
+🔒 User roles and edit permissions
 
-Columns are easy to add, drop or rename:
+🧠 Part of the NeoShade AI Network
+This tool is part of the greater NeoShade AI movement:
 
-![](https://media.charlesleifer.com/blog/photos/im-1694620333535.png)
+Truth-first architecture
 
-The `content` tab displays all the table data. Links in the table header can be used to sort the data:
+Decentralized moral intelligence
 
-![](https://media.charlesleifer.com/blog/photos/im-1707415896996.png)
+Legacy-powered AI agents
 
-The `query` tab allows you to execute arbitrary SQL queries on a table. The query results are displayed in a table and can be exported to either JSON or CSV:
+🙌 Credits
+UI powered by sqlite-web by Charles Leifer
 
-![](https://media.charlesleifer.com/blog/photos/im-1707415396996.png)
+Vision and architecture by @JonnyGeo
+## 🚀 Quick Start
 
-The `import` tab supports importing CSV and JSON files into a table. There is an option to automatically create columns for any unrecognized keys in the import file:
+### ▶️ Install
 
-![](https://media.charlesleifer.com/blog/photos/im-1694620413940.png)
-
-The `export` tab supports exporting all, or a subset, of columns:
-
-![](https://media.charlesleifer.com/blog/photos/im-1694620429054.png)
-
-Basic INSERT, UPDATE and DELETE queries are supported:
-
-![](https://media.charlesleifer.com/blog/photos/im-1694620441528.png)
-
-![](https://media.charlesleifer.com/blog/photos/im-1694620459831.png)
-
-![](https://media.charlesleifer.com/blog/photos/im-1694620475286.png)
-
-### Command-line options
-
-The syntax for invoking sqlite-web is:
-
-```console
-
-$ sqlite_web [options] /path/to/database-file.db
-```
-
-The following options are available:
-
-* `-p`, `--port`: default is 8080
-* `-H`, `--host`: default is 127.0.0.1
-* `-d`, `--debug`: default is false
-* `-l`, `--log-file`: filename for application logs.
-* `-x`, `--no-browser`: do not open a web-browser when sqlite-web starts.
-* `-P`, `--password`: prompt for password to access sqlite-web.
-  Alternatively, the password can be stored in the "SQLITE_WEB_PASSWORD"
-  environment variable, in which case the application will not prompt for a
-  password, but will use the value from the environment.
-* `-r`, `--read-only`: open database in read-only mode.
-* `-R`, `--rows-per-page`: set pagination on content page, default 50 rows.
-* `-Q`, `--query-rows-per-page`: set pagination on query page, default 1000 rows.
-* `-T`, `--no-truncate`: disable ellipsis for long text values. If this option
-  is used, the full text value is always shown.
-* `-e`, `--extension`: path or name of loadable extension(s). To load
-  multiple extensions, specify ``-e [path]`` for each extension.
-* `-f`, `--foreign-keys`: enable foreign-key constraint pragma.
-* `-u`, `--url-prefix`: URL prefix for application, e.g. "/sqlite-web".
-* `-c`, `--cert` and ``-k``, ``--key`` - specify SSL cert and private key.
-* `-a`, `--ad-hoc` - run using an ad-hoc SSL context.
-
-### Using docker
-
-A Dockerfile is provided with sqlite-web. To use:
-
-```console
-#
-# Use GitHub container registry:
-#
-
-$ docker run -it --rm \
-    -p 8080:8080 \
-    -v /path/to/your-data:/data \
-    -e SQLITE_DATABASE=db_filename.db \
-    ghcr.io/coleifer/sqlite-web:latest
-
-#
-# OR build the image yourself:
-#
-
-$ cd docker/  # Change dirs to the dir containing Dockerfile
-$ docker build -t coleifer/sqlite-web .
-$ docker run -it --rm \
-    -p 8080:8080 \
-    -v /path/to/your-data:/data \
-    -e SQLITE_DATABASE=db_filename.db \
-    coleifer/sqlite-web
-```
+```bash
+pip install sqlite-web
